@@ -30,6 +30,7 @@ fi
 mkdir -p "$OUT"
 python3 -I "$B/build_replay.py" "$WD/of" "$WORLD" "$OUT" > "$WD/replay.log" 2>&1
 cp "$WORLD" "$OUT/world.json"
+python3 -P "$T/join_pitlane.py" "$OUT/replay.json" >> "$WD/replay.log" 2>&1
 python3 -P "$T/clear_world.py" "$OUT/world.json" "$OUT/replay.json" >> "$WD/replay.log" 2>&1
 rm -f "$OUT/track.npz"
 echo "ok $KEY $(sed -n 's/^median err m \([0-9.]*\).*/map fit \1 m/p' "$WD/fit.log" 2>/dev/null | tail -1)"

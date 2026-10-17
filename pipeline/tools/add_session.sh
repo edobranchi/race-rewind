@@ -14,6 +14,7 @@ cp "$RWD/of/xf.json" "$WD/of/xf.json"
 mkdir -p "$OUT"
 python3 -I "$B/build_replay.py" "$WD/of" "$WORLD" "$OUT" > "$WD/replay.log" 2>&1
 rm -f "$OUT/track.npz"
+python3 -P "$T/join_pitlane.py" "$OUT/replay.json" >> "$WD/replay.log" 2>&1
 # keep this session's own track line and pit lane clear on the shared world too
 python3 -P "$T/clear_world.py" "$WORLD" "$OUT/replay.json" >> "$WD/replay.log" 2>&1
 gzip -f -1 "$WD"/of/loc_*.json "$WD"/of/car_*.json 2>/dev/null || true
